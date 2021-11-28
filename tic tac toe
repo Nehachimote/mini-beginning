@@ -1,0 +1,190 @@
+package com.company;
+import java.util.Scanner;
+
+class tic_tac_toe{
+    Scanner sc=new Scanner(System.in);
+    int player1,player2;
+    String c1=null,c2=null;
+    String game[][] = new String[3][3];
+
+    tic_tac_toe(){
+        System.out.println("Player 1 enter choice X/O :");
+        c1=sc.next();
+        System.out.println("Player 2 enter choice X/O :");
+        c2=sc.next();
+        //Player who choose X plays first
+        if(c1.equalsIgnoreCase("X")){
+            System.out.println("Player number 1 goes first.");
+        }
+        else if(c2.equalsIgnoreCase("X")){
+            System.out.println("Player number 2 goes first.");
+        }
+    }
+
+    void print_board(){
+        System.out.println("|---|---|---|");
+        System.out.println("| " + game[0][0] + " | " + game[0][1] + " | " + game[0][2] + " |");
+        System.out.println("|-----------|");
+        System.out.println("| " + game[1][0] + " | " + game[1][1] + " | " + game[1][2] + " |");
+        System.out.println("|-----------|");
+        System.out.println("| " + game[2][0] + " | " + game[2][1] + " | " + game[2][2] + " |");
+        System.out.println("|---|---|---|");
+    }
+
+    void game() {
+        int p1 = 0, p2 = 0;
+        String result=null;
+
+        game[0][0]="1";
+        game[0][1]="2";
+        game[0][2]="3";
+        game[1][0]="4";
+        game[1][1]="5";
+        game[1][2]="6";
+        game[2][0]="7";
+        game[2][1]="8";
+        game[2][2]="9";
+
+        print_board();
+        for (int i = 1; i <= 9; i++) {
+            if (i == 1 || i == 3 || i == 5 || i == 7 || i == 9) {
+                System.out.println("Enter position to place X in:");
+                p1 = sc.nextInt();
+                switch (p1) {
+                    case 1:
+                        game[0][0] = "X";
+                        break;
+                    case 2:
+                        game[0][1] = "X";
+                        break;
+                    case 3:
+                        game[0][2] = "X";
+                        break;
+                    case 4:
+                        game[1][0] = "X";
+                        break;
+                    case 5:
+                        game[1][1] = "X";
+                        break;
+                    case 6:
+                        game[1][2] = "X";
+                        break;
+                    case 7:
+                        game[2][0] = "X";
+                        break;
+                    case 8:
+                        game[2][1] = "X";
+                        break;
+                    case 9:
+                        game[2][2] = "X";
+                        break;
+
+                }
+            } else {
+                System.out.println("Enter position to place O in:");
+                p2 = sc.nextInt();
+                switch (p2) {
+                    case 1:
+                        game[0][0] = "O";
+                        break;
+                    case 2:
+                        game[0][1] = "O";
+                        break;
+                    case 3:
+                        game[0][2] = "O";
+                        break;
+                    case 4:
+                        game[1][0] = "O";
+                        break;
+                    case 5:
+                        game[1][1] = "O";
+                        break;
+                    case 6:
+                        game[1][2] = "O";
+                        break;
+                    case 7:
+                        game[2][0] = "O";
+                        break;
+                    case 8:
+                        game[2][1] = "O";
+                        break;
+                    case 9:
+                        game[2][2] = "O";
+                        break;
+
+                }
+            }
+            print_board();
+            result=winner();
+            if(result.equalsIgnoreCase("win")){
+                break;
+            }
+        }
+         if(result.equalsIgnoreCase("draw"))
+         System.out.println("Its a draw!\nThank you for playing.");
+    }
+
+    //To check winner
+    String winner(){
+        String check=null;
+    for(int i=1;i<=8;i++){
+        switch (i){
+            case 1:
+                check=game[0][0]+game[0][1]+game[0][2];
+                break;
+            case 2:
+                check=game[1][0]+game[1][1]+game[1][2];
+                break;
+            case 3:
+                check=game[2][0]+game[2][1]+game[2][2];
+                break;
+            case 4:
+                check=game[0][0]+game[1][0]+game[2][0];
+                break;
+            case 5:
+                check=game[0][1]+game[1][1]+game[2][1];
+                break;
+            case 6:
+                check=game[0][2]+game[1][2]+game[2][2];
+                break;
+            case 7:
+                check=game[0][0]+game[1][1]+game[2][2];
+                break;
+            case 8:
+                check=game[0][2]+game[1][1]+game[2][0];
+                break;
+
+        }
+        if(check.equals("XXX")){
+            if(c1.equals("X")){
+                System.out.println("Congratulations.\nPlayer 1 winner!");
+
+            }
+            else {
+                System.out.println("Congratulations.\nPlayer 2 winner!");
+            }
+            return "win";
+        }
+        else if(check.equals("OOO")){
+            if(c1.equals("O")){
+                System.out.println("Congratulations.\nPlayer 1 winner!");
+            }
+            else  {
+                System.out.println("Congratulations.\nPlayer 2 winner!");
+            }
+            return "win";
+        }
+
+    }
+    return "draw";
+    }
+
+}
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        tic_tac_toe obj=new tic_tac_toe();
+        obj.game();
+    }
+}
